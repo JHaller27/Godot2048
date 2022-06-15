@@ -1,5 +1,88 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Tile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TileBoard.gd" type="Script" id=2]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.729412, 0.647059, 0.423529, 1 )
+
+[node name="TileBoard" type="Control" parent="ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -240.0
+margin_top = -240.0
+margin_right = 240.0
+margin_bottom = 240.0
+script = ExtResource( 2 )
+
+[node name="Tile_0_0" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 48, 48 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_0_1" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 176, 48 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_0_2" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 304, 48 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_0_3" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 432, 48 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_1_0" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 48, 176 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_1_1" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 176, 176 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_1_2" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 304, 176 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_1_3" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 432, 176 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_2_0" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 48, 304 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_2_1" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 176, 304 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_2_2" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 304, 304 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_2_3" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 432, 304 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_3_0" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 48, 432 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_3_1" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 176, 432 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_3_2" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 304, 432 )
+scale = Vector2( 0.1875, 0.1875 )
+
+[node name="Tile_3_3" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
+position = Vector2( 432, 432 )
+scale = Vector2( 0.1875, 0.1875 )

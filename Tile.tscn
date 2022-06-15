@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://themes/tile_label_theme.tres" type="Theme" id=1]
+[ext_resource path="res://inkscape/tile-base.svg" type="Texture" id=2]
+
+[node name="Tile" type="Sprite"]
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -384.0
+margin_top = -323.5
+margin_right = -128.0
+margin_bottom = -188.5
+theme = ExtResource( 1 )
+text = "2048"
