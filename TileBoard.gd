@@ -59,6 +59,7 @@ func add_random_tile() -> bool:
 	new_tile.set_scale(scale)
 
 	tiles[row][col] = new_tile
+	new_tile.set_value(2)
 
 	self.add_child(new_tile)
 
