@@ -59,11 +59,19 @@ func add_random_tile() -> bool:
 	new_tile.set_scale(scale)
 
 	tiles[row][col] = new_tile
-	new_tile.set_value(2)
+	var value = 1
+	if rng.randi_range(0, 9) >= 9:
+		value = 2
+	new_tile.set_value(value)
 
 	self.add_child(new_tile)
 
 	return true
+
+
+func _input(event):
+	if event.is_action_pressed("ui_accept"):
+		add_random_tile()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,9 +1,13 @@
 extends Sprite
 
-onready var label: Label = $Label
+var power: int = 0
 
 func _ready():
-	label = $Label
+	self._update_label()
 
-func set_value(power: int):
-	label.text = str(2^power)
+func _update_label():
+	$Label.text = str(pow(2, self.power))
+
+func set_value(new_power: int):
+	self.power = new_power
+	self._update_label()
