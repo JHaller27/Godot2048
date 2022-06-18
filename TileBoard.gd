@@ -50,7 +50,12 @@ func _ready():
 		positions.append(position_row)
 		tiles.append(tiles_row)
 
-	add_random_tile()
+#	add_random_tile()
+#	add_tile(0, 0, 1)
+	# BUGBUG Test w/ slide down
+	add_tile(1, 0, 1)
+	add_tile(2, 0, 1)
+	add_tile(3, 0, 1)
 	$Tween.connect("tween_all_completed", self, "_on_done_tweening")
 
 	reset_just_moved()
@@ -128,14 +133,14 @@ func _on_done_tweening():
 	self.reset_just_moved()
 
 
-func _find_next_spot_desc(src_tile: Object, src_index: int, row: Array, just_moved_row: Array) -> int:
+func _find_next_spot_desc(src_tile: Object, src_index: int, arr: Array, just_moved_arr: Array) -> int:
 	var dst_index = src_index
 	var scout_index = dst_index-1
 	while scout_index >= 0:
-		var scout_tile = row[scout_index]
+		var scout_tile = arr[scout_index]
 		if scout_tile != null:
-			var dst_tile = row[dst_index]
-			if !just_moved_row[scout_index] && scout_tile.get_value() == src_tile.get_value():
+			var dst_tile = arr[dst_index]
+			if !just_moved_arr[scout_index] && scout_tile.get_value() == src_tile.get_value():
 				return scout_index
 			return dst_index
 
@@ -145,21 +150,21 @@ func _find_next_spot_desc(src_tile: Object, src_index: int, row: Array, just_mov
 	return 0
 
 
-func _find_next_spot_asc(src_tile: Object, src_index: int, row: Array, just_moved_row: Array) -> int:
+func _find_next_spot_asc(src_tile: Object, src_index: int, arr: Array, just_moved_arr: Array) -> int:
 	var dst_index = src_index
 	var scout_index = dst_index+1
-	while scout_index < row.size():
-		var scout_tile = row[scout_index]
+	while scout_index < arr.size():
+		var scout_tile = arr[scout_index]
 		if scout_tile != null:
-			var dst_tile = row[dst_index]
-			if !just_moved_row[scout_index] && scout_tile.get_value() == src_tile.get_value():
+			var dst_tile = arr[dst_index]
+			if !just_moved_arr[scout_index] && scout_tile.get_value() == src_tile.get_value():
 				return scout_index
 			return dst_index
 
 		dst_index = scout_index
 		scout_index += 1
 
-	return row.size()-1
+	return arr.size()-1
 
 
 func _slide_left():
