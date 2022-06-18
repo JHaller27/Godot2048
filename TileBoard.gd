@@ -13,6 +13,14 @@ var new_values: Array = []
 var to_free: Array = []
 var just_moved: Array = []
 
+
+func get_column(grid: Array, idx: int) -> Array:
+	var col = []
+	for row in grid:
+		col.append(row[idx])
+	return col
+
+
 func reset_just_moved():
 	just_moved = []
 	for y in range(4):
@@ -42,10 +50,7 @@ func _ready():
 		positions.append(position_row)
 		tiles.append(tiles_row)
 
-#	add_random_tile()
-	add_tile(0, 0, 1)
-	add_tile(0, 1, 1)
-	add_tile(0, 2, 1)
+	add_random_tile()
 	$Tween.connect("tween_all_completed", self, "_on_done_tweening")
 
 	reset_just_moved()
@@ -123,7 +128,7 @@ func _on_done_tweening():
 	self.reset_just_moved()
 
 
-func _find_next_left_spot(src_tile: Object, src_index: int, row: Array, just_moved_row: Array) -> int:
+func _find_next_spot_desc(src_tile: Object, src_index: int, row: Array, just_moved_row: Array) -> int:
 	var dst_index = src_index
 	var scout_index = dst_index-1
 	while scout_index >= 0:
@@ -140,7 +145,7 @@ func _find_next_left_spot(src_tile: Object, src_index: int, row: Array, just_mov
 	return 0
 
 
-func _find_next_right_spot(src_tile: Object, src_index: int, row: Array, just_moved_row: Array) -> int:
+func _find_next_spot_asc(src_tile: Object, src_index: int, row: Array, just_moved_row: Array) -> int:
 	var dst_index = src_index
 	var scout_index = dst_index+1
 	while scout_index < row.size():
@@ -164,7 +169,7 @@ func _slide_left():
 			var src_tile = row[src_index]
 			if src_tile == null:
 				continue
-			var dst_index = _find_next_left_spot(src_tile, src_index, row, just_moved[row_index])
+			var dst_index = _find_next_spot_desc(src_tile, src_index, row, just_moved[row_index])
 			if dst_index != src_index:
 				self._slide_tile(src_tile, row_index, src_index, row[dst_index], row_index, dst_index)
 	$Tween.start()
@@ -177,18 +182,36 @@ func _slide_right():
 			var src_tile = row[src_index]
 			if src_tile == null:
 				continue
-			var dst_index = _find_next_right_spot(src_tile, src_index, row, just_moved[row_index])
+			var dst_index = _find_next_spot_asc(src_tile, src_index, row, just_moved[row_index])
 			if dst_index != src_index:
 				self._slide_tile(src_tile, row_index, src_index, row[dst_index], row_index, dst_index)
 	$Tween.start()
 
 
 func _slide_up():
-	pass
+	for col_index in range(self.tiles.size()):
+		var col = get_column(self.tiles, col_index)
+		for src_index in range(1, col.size()):
+			var src_tile = col[src_index]
+			if src_tile == null:
+				continue
+			var dst_index = _find_next_spot_desc(src_tile, src_index, col, get_column(just_moved, col_index))
+			if dst_index != src_index:
+				self._slide_tile(src_tile, src_index, col_index, col[dst_index], dst_index, col_index)
+	$Tween.start()
 
 
 func _slide_down():
-	pass
+	for col_index in range(self.tiles.size()):
+		var col = get_column(self.tiles, col_index)
+		for src_index in range(col.size()-1, -1, -1):
+			var src_tile = col[src_index]
+			if src_tile == null:
+				continue
+			var dst_index = _find_next_spot_asc(src_tile, src_index, col, get_column(just_moved, col_index))
+			if dst_index != src_index:
+				self._slide_tile(src_tile, src_index, col_index, col[dst_index], dst_index, col_index)
+	$Tween.start()
 
 
 func _input(event):
