@@ -108,19 +108,36 @@ func _on_done_tweening():
 
 func _find_next_left_spot(src_tile: Object, src_index: int, row: Array) -> int:
 	var dst_index = src_index
-	for scout_index in range(src_index-1, -1, -1):
-		dst_index = scout_index+1
+	var scout_index = dst_index-1
+	while scout_index >= 0:
 		var scout_tile = row[scout_index]
-		if scout_tile == null:
-			continue
-
-		var dst_tile = row[dst_index]
-		if scout_tile.get_value() == src_tile.get_value():
-			return scout_index
-		else:
+		if scout_tile != null:
+			var dst_tile = row[dst_index]
+			if scout_tile.get_value() == src_tile.get_value():
+				return scout_index
 			return dst_index
 
+		dst_index = scout_index
+		scout_index -= 1
+
 	return 0
+
+
+func _find_next_right_spot(src_tile: Object, src_index: int, row: Array) -> int:
+	var dst_index = src_index
+	var scout_index = dst_index+1
+	while scout_index < row.size():
+		var scout_tile = row[scout_index]
+		if scout_tile != null:
+			var dst_tile = row[dst_index]
+			if scout_tile.get_value() == src_tile.get_value():
+				return scout_index
+			return dst_index
+
+		dst_index = scout_index
+		scout_index += 1
+
+	return row.size()-1
 
 
 func _slide_left():
@@ -137,7 +154,16 @@ func _slide_left():
 
 
 func _slide_right():
-	pass
+	for row_index in range(self.tiles.size()):
+		var row = self.tiles[row_index]
+		for src_index in range(row.size()-1, -1, -1):
+			var src_tile = row[src_index]
+			if src_tile == null:
+				continue
+			var dst_index = _find_next_right_spot(src_tile, src_index, row)
+			if dst_index != src_index:
+				self._slide_tile(src_tile, row_index, src_index, row[dst_index], row_index, dst_index)
+	$Tween.start()
 
 
 func _slide_up():
