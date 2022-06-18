@@ -11,3 +11,6 @@ func _update_label():
 func set_value(new_power: int):
 	self.power = new_power
 	self._update_label()
+
+func get_value() -> int:
+	return self.power

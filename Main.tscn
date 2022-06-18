@@ -23,6 +23,7 @@ margin_right = 240.0
 margin_bottom = 240.0
 script = ExtResource( 2 )
 tile_scene = ExtResource( 1 )
+slide_time = 0.5
 
 [node name="Tile_0_0" parent="ColorRect/TileBoard" instance=ExtResource( 1 )]
 position = Vector2( 48, 48 )
