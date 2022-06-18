@@ -11,6 +11,15 @@ var scale: Vector2 = Vector2.ZERO
 
 var new_values: Array = []
 var to_free: Array = []
+var just_moved: Array = []
+
+func reset_just_moved():
+	just_moved = []
+	for y in range(4):
+		just_moved.append([])
+		for x in range(4):
+			just_moved[y].append(false)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,8 +42,13 @@ func _ready():
 		positions.append(position_row)
 		tiles.append(tiles_row)
 
-	add_random_tile()
+#	add_random_tile()
+	add_tile(0, 0, 1)
+	add_tile(0, 1, 1)
+	add_tile(0, 2, 1)
 	$Tween.connect("tween_all_completed", self, "_on_done_tweening")
+
+	reset_just_moved()
 
 
 func _find_empty_spot() -> Array:
@@ -81,6 +95,8 @@ func _slide_tile(from_obj: Object, from_y: int, from_x: int, to_obj: Object, to_
 	if to_obj != null && from_obj.get_value() == to_obj.get_value():
 		self.new_values.append([to_y, to_x, to_obj.get_value()+1])
 
+	just_moved[to_y][to_x] = to_obj != null
+
 	var from_pos = self.positions[from_y][from_x]
 	var to_pos = self.positions[to_y][to_x]
 	self.tiles[to_y][to_x] = self.tiles[from_y][from_x]
@@ -104,16 +120,17 @@ func _on_done_tweening():
 	self.to_free = []
 
 	self.add_random_tile()
+	self.reset_just_moved()
 
 
-func _find_next_left_spot(src_tile: Object, src_index: int, row: Array) -> int:
+func _find_next_left_spot(src_tile: Object, src_index: int, row: Array, just_moved_row: Array) -> int:
 	var dst_index = src_index
 	var scout_index = dst_index-1
 	while scout_index >= 0:
 		var scout_tile = row[scout_index]
 		if scout_tile != null:
 			var dst_tile = row[dst_index]
-			if scout_tile.get_value() == src_tile.get_value():
+			if !just_moved_row[scout_index] && scout_tile.get_value() == src_tile.get_value():
 				return scout_index
 			return dst_index
 
@@ -123,14 +140,14 @@ func _find_next_left_spot(src_tile: Object, src_index: int, row: Array) -> int:
 	return 0
 
 
-func _find_next_right_spot(src_tile: Object, src_index: int, row: Array) -> int:
+func _find_next_right_spot(src_tile: Object, src_index: int, row: Array, just_moved_row: Array) -> int:
 	var dst_index = src_index
 	var scout_index = dst_index+1
 	while scout_index < row.size():
 		var scout_tile = row[scout_index]
 		if scout_tile != null:
 			var dst_tile = row[dst_index]
-			if scout_tile.get_value() == src_tile.get_value():
+			if !just_moved_row[scout_index] && scout_tile.get_value() == src_tile.get_value():
 				return scout_index
 			return dst_index
 
@@ -147,7 +164,7 @@ func _slide_left():
 			var src_tile = row[src_index]
 			if src_tile == null:
 				continue
-			var dst_index = _find_next_left_spot(src_tile, src_index, row)
+			var dst_index = _find_next_left_spot(src_tile, src_index, row, just_moved[row_index])
 			if dst_index != src_index:
 				self._slide_tile(src_tile, row_index, src_index, row[dst_index], row_index, dst_index)
 	$Tween.start()
@@ -160,7 +177,7 @@ func _slide_right():
 			var src_tile = row[src_index]
 			if src_tile == null:
 				continue
-			var dst_index = _find_next_right_spot(src_tile, src_index, row)
+			var dst_index = _find_next_right_spot(src_tile, src_index, row, just_moved[row_index])
 			if dst_index != src_index:
 				self._slide_tile(src_tile, row_index, src_index, row[dst_index], row_index, dst_index)
 	$Tween.start()
