@@ -13,75 +13,79 @@ offset = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 64.0
-margin_bottom = 38.0
+margin_bottom = 48.0
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="LineEdit" parent="VBoxContainer"]
 margin_right = 64.0
-margin_bottom = 14.0
+margin_bottom = 24.0
 text = "Default"
+editable = false
+expand_to_text_length = true
 
-[node name="Button" type="Button" parent="VBoxContainer"]
-margin_top = 18.0
+[node name="RenameButton" type="Button" parent="VBoxContainer"]
+margin_top = 28.0
 margin_right = 64.0
-margin_bottom = 38.0
+margin_bottom = 48.0
 text = "Rename"
 
 [node name="ColorPickerButton1" type="ColorPickerButton" parent="."]
 margin_left = 68.0
 margin_right = 160.0
-margin_bottom = 38.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton2" type="ColorPickerButton" parent="."]
 margin_left = 164.0
 margin_right = 256.0
-margin_bottom = 38.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton3" type="ColorPickerButton" parent="."]
 margin_left = 260.0
 margin_right = 352.0
-margin_bottom = 38.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton4" type="ColorPickerButton" parent="."]
 margin_left = 356.0
 margin_right = 448.0
-margin_bottom = 38.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton5" type="ColorPickerButton" parent="."]
 margin_left = 452.0
 margin_right = 544.0
-margin_bottom = 38.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton6" type="ColorPickerButton" parent="."]
 margin_left = 548.0
 margin_right = 640.0
-margin_bottom = 38.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton7" type="ColorPickerButton" parent="."]
 margin_left = 644.0
 margin_right = 736.0
-margin_bottom = 38.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton8" type="ColorPickerButton" parent="."]
 margin_left = 740.0
 margin_right = 832.0
-margin_bottom = 38.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton9" type="ColorPickerButton" parent="."]
 margin_left = 836.0
 margin_right = 928.0
-margin_bottom = 38.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="ColorPickerButton10" type="ColorPickerButton" parent="."]
 margin_left = 932.0
 margin_right = 1024.0
-margin_bottom = 38.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
+
+[connection signal="pressed" from="VBoxContainer/RenameButton" to="." method="_on_RenameButton_pressed"]

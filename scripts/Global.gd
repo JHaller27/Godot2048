@@ -28,3 +28,13 @@ func _deferred_goto_scene(new_scene: Node) -> void:
 	ROOT.add_child(new_scene)
 	current_scene = new_scene
 	current_scene.visible = true
+
+
+func save_game_theme(name: String) -> void:
+	var d = GameTheme.to_dict()
+	name = name.replace(" ", "_")
+	var path = "user://%s.theme" % name
+	var file = File.new()
+	file.open(path, File.WRITE)
+	file.store_line(to_json(d))
+	file.close()

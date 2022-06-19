@@ -40,3 +40,23 @@ func changed() -> bool:
 
 func reset_changed() -> void:
 	_changed = false
+
+
+func to_dict() -> Dictionary:
+	var export_colors = []
+	for color in self.colors:
+		color = color as Color
+		export_colors.append(color.to_rgba64())
+
+	var save_dict = {
+		"tiles": export_colors
+	}
+
+	return save_dict
+
+
+func from_dict(base: Dictionary) -> void:
+	self.colors = []
+	for rgba in base["tiles"]:
+		var color = Color(rgba)
+		self.colors.append(color)

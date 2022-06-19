@@ -3,6 +3,7 @@ extends Node
 
 export (int) var offset
 var leading_children = 0
+var editing = false
 
 
 func _ready():
@@ -34,3 +35,30 @@ func _on_color_changed(color: Color, index: int) -> void:
 	GameTheme.set_value(value, color)
 	self.reset_color_preview(index)
 	Main.try_update_colors()
+	Global.save_game_theme(self.get_theme_name())
+
+
+func get_theme_name() -> String:
+	return $VBoxContainer/Label.text
+
+func set_theme_name(name: String):
+	$VBoxContainer/Label.text = name
+
+
+func _on_RenameButton_pressed():
+	if editing:
+		editing = false
+		done_editing()
+	else:
+		editing = true
+		edit_label()
+
+
+func edit_label():
+	$VBoxContainer/Label.editable = true
+	$VBoxContainer/RenameButton.text = "Done"
+
+func done_editing():
+	$VBoxContainer/Label.editable = false
+	$VBoxContainer/RenameButton.text = "Rename"
+	Global.save_game_theme(self.get_theme_name())
