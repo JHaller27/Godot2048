@@ -12,6 +12,8 @@ config_version=4
 
 config/name="2048"
 run/main_scene="res://scenes/Menu.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Game2048"
 config/icon="res://icon.png"
 
 [autoload]
@@ -20,6 +22,10 @@ Menu="*res://scenes/Menu.tscn"
 Main="*res://scenes/Main.tscn"
 Global="*res://scripts/Global.gd"
 GameTheme="*res://scripts/GameTheme.gd"
+
+[global]
+
+user_custom=false
 
 [input]
 

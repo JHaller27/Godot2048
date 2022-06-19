@@ -1,9 +1,9 @@
 extends Control
 
 onready var color_tiles_container = $Panel/MarginContainer/VBoxContainer/ColorTilesContainer
-onready var tile_container = $Panel/MarginContainer/VBoxContainer/ColorTilesContainer/TileContainer
+onready var tile_container = $Panel/MarginContainer/VBoxContainer/TileContainer
 onready var background = $Panel/MarginContainer/VBoxContainer/ColorTilesContainer/Background
-var offset = 0
+var offset = -1
 
 
 func _ready():
@@ -17,7 +17,7 @@ func _ready():
 
 
 func reset_color_preview(except: int = -1):
-	for index in range(tile_container.get_child_count()):
+	for index in range(1, tile_container.get_child_count()):
 		var value = index + offset
 		if except == index:
 			continue
