@@ -230,9 +230,10 @@ func _input(event):
 		Global.goto_scene(Menu)
 
 
-func _try_update_colors():
+func try_update_colors():
 	if GameTheme.changed():
 		for row in self.tiles:
 			for tile in row:
-				tile.update_color()
+				if tile != null:
+					tile.update_color()
 		GameTheme.reset_changed()

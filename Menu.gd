@@ -32,6 +32,7 @@ func _on_color_changed(color: Color, index: int) -> void:
 	var value = index + offset
 	GameTheme.set_value(value, color)
 	reset_color_preview(index)
+	Main.try_update_colors()
 
 
 func _on_PlayButton_pressed():
