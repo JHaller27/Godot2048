@@ -1,9 +1,11 @@
-extends Resource
+extends Node
 
 var UNKNOWN_COLOR = Color("#ffffff")
 var colors = [UNKNOWN_COLOR, UNKNOWN_COLOR]
 
 var bg_color = Color("#baa56c")
+
+var _changed = false
 
 
 func get_value(val: int) -> Color:
@@ -20,6 +22,7 @@ func set_value(val: int, color: Color) -> void:
 	while colors.size()-1 < val:
 		colors.append(UNKNOWN_COLOR)
 	colors[val] = color
+	_changed = true
 
 
 func get_bg() -> Color:
@@ -28,3 +31,12 @@ func get_bg() -> Color:
 
 func set_bg(color: Color) -> void:
 	bg_color = color
+	_changed = true
+
+
+func changed() -> bool:
+	return _changed
+
+
+func reset_changed() -> void:
+	_changed = false

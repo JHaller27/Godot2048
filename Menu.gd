@@ -1,11 +1,8 @@
 extends Control
 
-const game_theme_preload = preload("res://GameTheme.gd")
-
 onready var color_tiles_container = $Panel/MarginContainer/VBoxContainer/ColorTilesContainer
 onready var tile_container = $Panel/MarginContainer/VBoxContainer/ColorTilesContainer/TileContainer
 onready var background = $Panel/MarginContainer/VBoxContainer/ColorTilesContainer/Background
-onready var game_theme = game_theme_preload.new()
 var offset = 0
 
 
@@ -25,7 +22,7 @@ func reset_color_preview(except: int = -1):
 		if except == index:
 			continue
 
-		var color = game_theme.get_value(value)
+		var color = GameTheme.get_value(value)
 
 		var child = tile_container.get_child(index)
 		child.color = color
@@ -33,7 +30,7 @@ func reset_color_preview(except: int = -1):
 
 func _on_color_changed(color: Color, index: int) -> void:
 	var value = index + offset
-	game_theme.set_value(value, color)
+	GameTheme.set_value(value, color)
 	reset_color_preview(index)
 
 

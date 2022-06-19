@@ -230,6 +230,9 @@ func _input(event):
 		Global.goto_scene(Menu)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _try_update_colors():
+	if GameTheme.changed():
+		for row in self.tiles:
+			for tile in row:
+				tile.update_color()
+		GameTheme.reset_changed()

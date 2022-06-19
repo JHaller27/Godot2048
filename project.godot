@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 Menu="*res://Menu.tscn"
 Main="*res://Main.tscn"
 Global="*res://Global.gd"
+GameTheme="*res://GameTheme.gd"
 
 [input]
 
