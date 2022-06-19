@@ -16,6 +16,8 @@ func _ready():
 		var child = tile_container.get_child(index)
 		child.connect("color_changed", self, "_on_color_changed", [index])
 
+	Main.visible = false
+
 
 func reset_color_preview(except: int = -1):
 	for index in range(tile_container.get_child_count()):
@@ -33,3 +35,11 @@ func _on_color_changed(color: Color, index: int) -> void:
 	var value = index + offset
 	game_theme.set_value(value, color)
 	reset_color_preview(index)
+
+
+func _on_PlayButton_pressed():
+	Global.goto_scene(Main)
+
+
+func _on_QuitButton_pressed():
+	get_tree().quit()

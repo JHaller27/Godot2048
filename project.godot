@@ -14,6 +14,12 @@ config/name="2048"
 run/main_scene="res://Menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Menu="*res://Menu.tscn"
+Main="*res://Main.tscn"
+Global="*res://Global.gd"
+
 [input]
 
 slide_left={

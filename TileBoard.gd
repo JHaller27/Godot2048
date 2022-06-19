@@ -50,9 +50,7 @@ func _ready():
 		positions.append(position_row)
 		tiles.append(tiles_row)
 
-#	add_random_tile()
-	for i in range(4):
-		add_tile(i, i, 1)
+	add_random_tile()
 	$Tween.connect("tween_all_completed", self, "_on_done_tweening")
 
 	reset_just_moved()
@@ -228,6 +226,8 @@ func _input(event):
 		self._slide_up()
 	elif event.is_action_pressed("slide_down"):
 		self._slide_down()
+	elif event.is_action_pressed("ui_cancel"):
+		Global.goto_scene(Menu)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
