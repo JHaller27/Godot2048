@@ -10,7 +10,7 @@ func _update_label() -> void:
 
 func update_color() -> void:
 	var color = GameTheme.get_value(self.power)
-	$CanvasModulate.set_color(color)
+	self.self_modulate = color
 
 func set_value(new_power: int) -> void:
 	self.power = new_power
