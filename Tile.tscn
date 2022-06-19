@@ -20,3 +20,5 @@ margin_bottom = -188.5
 theme = ExtResource( 1 )
 text = "2048"
 align = 1
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]

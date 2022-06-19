@@ -50,7 +50,9 @@ func _ready():
 		positions.append(position_row)
 		tiles.append(tiles_row)
 
-	add_random_tile()
+#	add_random_tile()
+	for i in range(4):
+		add_tile(i, i, 1)
 	$Tween.connect("tween_all_completed", self, "_on_done_tweening")
 
 	reset_just_moved()
