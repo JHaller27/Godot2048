@@ -11,15 +11,15 @@ config_version=4
 [application]
 
 config/name="2048"
-run/main_scene="res://Menu.tscn"
+run/main_scene="res://scenes/Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Menu="*res://Menu.tscn"
-Main="*res://Main.tscn"
-Global="*res://Global.gd"
-GameTheme="*res://GameTheme.gd"
+Menu="*res://scenes/Menu.tscn"
+Main="*res://scenes/Main.tscn"
+Global="*res://scripts/Global.gd"
+GameTheme="*res://scripts/GameTheme.gd"
 
 [input]
 

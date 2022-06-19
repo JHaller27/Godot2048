@@ -2,7 +2,7 @@
 
 [ext_resource path="res://themes/tile_label_theme.tres" type="Theme" id=1]
 [ext_resource path="res://inkscape/tile-base.svg" type="Texture" id=2]
-[ext_resource path="res://Tile.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Tile.gd" type="Script" id=3]
 
 [node name="Tile" type="Sprite"]
 texture = ExtResource( 2 )
