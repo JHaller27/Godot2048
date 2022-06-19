@@ -50,12 +50,7 @@ func _ready():
 		positions.append(position_row)
 		tiles.append(tiles_row)
 
-#	add_random_tile()
-#	add_tile(0, 0, 1)
-	# BUGBUG Test w/ slide down
-	add_tile(1, 0, 1)
-	add_tile(2, 0, 1)
-	add_tile(3, 0, 1)
+	add_random_tile()
 	$Tween.connect("tween_all_completed", self, "_on_done_tweening")
 
 	reset_just_moved()
@@ -195,8 +190,8 @@ func _slide_right():
 
 func _slide_up():
 	for col_index in range(self.tiles.size()):
-		var col = get_column(self.tiles, col_index)
-		for src_index in range(1, col.size()):
+		for src_index in range(1, 4):
+			var col = get_column(self.tiles, col_index)
 			var src_tile = col[src_index]
 			if src_tile == null:
 				continue
@@ -208,8 +203,8 @@ func _slide_up():
 
 func _slide_down():
 	for col_index in range(self.tiles.size()):
-		var col = get_column(self.tiles, col_index)
-		for src_index in range(col.size()-1, -1, -1):
+		for src_index in range(4-1, -1, -1):
+			var col = get_column(self.tiles, col_index)
 			var src_tile = col[src_index]
 			if src_tile == null:
 				continue
