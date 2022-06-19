@@ -106,7 +106,10 @@ func _slide_tile(from_obj: Object, from_y: int, from_x: int, to_obj: Object, to_
 	var to_pos = self.positions[to_y][to_x]
 	self.tiles[to_y][to_x] = self.tiles[from_y][from_x]
 	self.tiles[from_y][from_x] = null
-	$Tween.interpolate_property(from_obj, "position", from_pos, to_pos, self.slide_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+
+	var dist = abs(to_y - from_y) + abs(to_x - from_x)
+	var slide_factor = dist / 4.0
+	$Tween.interpolate_property(from_obj, "position", from_pos, to_pos, self.slide_time * slide_factor, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 	if to_obj != null:
 		self.to_free.append(to_obj)
