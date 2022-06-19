@@ -27,5 +27,4 @@ func _deferred_goto_scene(new_scene: Node) -> void:
 		ROOT.remove_child(current_scene)
 	ROOT.add_child(new_scene)
 	current_scene = new_scene
-	print("Goto root children: ", ROOT.get_child_count())
 	current_scene.visible = true
