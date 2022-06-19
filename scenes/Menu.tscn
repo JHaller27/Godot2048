@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/Menu.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ThemePreview.tscn" type="PackedScene" id=2]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -33,85 +34,13 @@ margin_right = 1024.0
 margin_bottom = 44.0
 text = "Quit"
 
-[node name="TileContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="ThemePreview" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 48.0
 margin_right = 1024.0
 margin_bottom = 86.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TileContainer"]
-margin_right = 64.0
-margin_bottom = 38.0
-
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/TileContainer/VBoxContainer"]
-margin_right = 64.0
-margin_bottom = 14.0
-text = "Default"
-
-[node name="Button" type="Button" parent="Panel/MarginContainer/VBoxContainer/TileContainer/VBoxContainer"]
-margin_top = 18.0
-margin_right = 64.0
-margin_bottom = 38.0
-text = "Rename"
-
-[node name="ColorPickerButton1" type="ColorPickerButton" parent="Panel/MarginContainer/VBoxContainer/TileContainer"]
-margin_left = 68.0
-margin_right = 160.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-
-[node name="ColorPickerButton2" type="ColorPickerButton" parent="Panel/MarginContainer/VBoxContainer/TileContainer"]
-margin_left = 164.0
-margin_right = 256.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-
-[node name="ColorPickerButton3" type="ColorPickerButton" parent="Panel/MarginContainer/VBoxContainer/TileContainer"]
-margin_left = 260.0
-margin_right = 352.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-
-[node name="ColorPickerButton4" type="ColorPickerButton" parent="Panel/MarginContainer/VBoxContainer/TileContainer"]
-margin_left = 356.0
-margin_right = 448.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-
-[node name="ColorPickerButton5" type="ColorPickerButton" parent="Panel/MarginContainer/VBoxContainer/TileContainer"]
-margin_left = 452.0
-margin_right = 544.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-
-[node name="ColorPickerButton6" type="ColorPickerButton" parent="Panel/MarginContainer/VBoxContainer/TileContainer"]
-margin_left = 548.0
-margin_right = 640.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-
-[node name="ColorPickerButton7" type="ColorPickerButton" parent="Panel/MarginContainer/VBoxContainer/TileContainer"]
-margin_left = 644.0
-margin_right = 736.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-
-[node name="ColorPickerButton8" type="ColorPickerButton" parent="Panel/MarginContainer/VBoxContainer/TileContainer"]
-margin_left = 740.0
-margin_right = 832.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-
-[node name="ColorPickerButton9" type="ColorPickerButton" parent="Panel/MarginContainer/VBoxContainer/TileContainer"]
-margin_left = 836.0
-margin_right = 928.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-
-[node name="ColorPickerButton10" type="ColorPickerButton" parent="Panel/MarginContainer/VBoxContainer/TileContainer"]
-margin_left = 932.0
-margin_right = 1024.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
 
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
