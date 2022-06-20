@@ -13,6 +13,8 @@ var new_values: Array = []
 var to_free: Array = []
 var just_moved: Array = []
 
+const board_preload = preload("res://resources/Board.gd")
+
 
 func get_column(grid: Array, idx: int) -> Array:
 	var col = []
@@ -237,3 +239,34 @@ func try_update_colors():
 				if tile != null:
 					tile.update_color()
 		GameTheme.reset_changed()
+
+
+func to_board() -> Board:
+	var board = board_preload.new()
+	board.init()
+
+	for y in range(board.size()):
+		for x in range(board.size()):
+			var tile = tiles[y][x]
+			var val = -1
+			if tile != null:
+				val = tile.get_value()
+			board.set_at(y, x, val)
+	return board
+
+
+func from_board(board: Board) -> void:
+	for y in range(4):
+		for x in range(4):
+			var tile = self.tiles[y][x]
+			if tile == null:
+				continue
+			tile.free()
+			self.tiles[y][x] = null
+
+	for coord in board.itr_coords():
+		var val = coord[2]
+		if val != -1:
+			var row = coord[0]
+			var col = coord[1]
+			add_tile(row, col, val)

@@ -15,3 +15,12 @@ func _on_PlayButton_pressed():
 
 func _on_QuitButton_pressed():
 	get_tree().quit()
+
+
+func _on_SaveButton_pressed():
+	Global.save_game()
+
+
+func _on_LoadButton_pressed():
+	Global.load_game()
+	Global.goto_scene(Main)

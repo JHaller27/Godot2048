@@ -8,6 +8,28 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Resource",
+"class": "Board",
+"language": "GDScript",
+"path": "res://resources/Board.gd"
+}, {
+"base": "Resource",
+"class": "SaveGame",
+"language": "GDScript",
+"path": "res://resources/SaveGame.gd"
+}, {
+"base": "Sprite",
+"class": "Tile",
+"language": "GDScript",
+"path": "res://scripts/Tile.gd"
+} ]
+_global_script_class_icons={
+"Board": "",
+"SaveGame": "",
+"Tile": ""
+}
+
 [application]
 
 config/name="2048"

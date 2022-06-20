@@ -1,6 +1,8 @@
 extends Node
 
 
+const save_game_preload = preload("res://resources/SaveGame.gd")
+
 var current_scene: Node = null
 onready var ROOT = get_tree().get_root()
 
@@ -30,11 +32,10 @@ func _deferred_goto_scene(new_scene: Node) -> void:
 	current_scene.visible = true
 
 
-func save_game_theme(name: String) -> void:
-	var d = GameTheme.to_dict()
-	name = name.replace(" ", "_")
-	var path = "user://%s.theme" % name
-	var file = File.new()
-	file.open(path, File.WRITE)
-	file.store_line(to_json(d))
-	file.close()
+func save_game() -> void:
+	var save_game = save_game_preload.new()
+	save_game.write_save()
+
+func load_game() -> void:
+	var save_game = save_game_preload.load_save()
+	Main.arrange_from_save(save_game)

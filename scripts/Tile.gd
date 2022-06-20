@@ -1,3 +1,4 @@
+class_name Tile
 extends Sprite
 
 var power: int = 0
