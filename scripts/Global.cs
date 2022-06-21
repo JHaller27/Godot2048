@@ -48,6 +48,7 @@ namespace scripts
 			this.CurrentGameThemeIndex = this.GameThemes.Count - 1;
 
 			gameTheme.Connect(nameof(GameTheme.ThemeUpdated), this, nameof(UpdateTheme));
+			this.UpdateTheme();
 		}
 
 		public GameTheme GetCurrentGameTheme()

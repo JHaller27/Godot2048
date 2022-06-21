@@ -24,6 +24,8 @@ public class ThemePreview : HBoxContainer
 			button.SetMeta(TileValueMetaLabel, value);
 			button.Connect("color_changed", this, nameof(UpdateColor), new(value));
 			value++;
+
+			button.Color = Global.Instance.GetCurrentGameTheme().GetTileColor(value);
 		}
 	}
 
