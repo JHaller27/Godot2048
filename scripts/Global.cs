@@ -1,3 +1,4 @@
+using Godot.Collections;
 using Godot;
 
 namespace scripts
@@ -6,9 +7,12 @@ namespace scripts
 	{
 		public static Global Instance { get; private set; }
 
-		private Node MenuScene { get; set; }
-		private Node MainScene { get; set; }
+		private Menu MenuScene { get; set; }
+		private Main MainScene { get; set; }
 		private Node CurrentScene { get; set; }
+
+		[Export] public Array<GameTheme> GameThemes = new();
+		[Export] public int CurrentGameThemeIndex = -1;
 
 		public override void _Ready()
 		{
@@ -16,10 +20,10 @@ namespace scripts
 			this.CurrentScene = root.GetChild(root.GetChildCount() - 1);
 
 			PackedScene menuPreload = GD.Load<PackedScene>("res://scenes/Menu.tscn");
-			this.MenuScene = menuPreload.Instance();
+			this.MenuScene = menuPreload.Instance<Menu>();
 
 			PackedScene mainPreload = GD.Load<PackedScene>("res://scenes/Main.tscn");
-			this.MainScene = mainPreload.Instance();
+			this.MainScene = mainPreload.Instance<Main>();
 
 			Global.Instance = this;
 		}
@@ -37,5 +41,20 @@ namespace scripts
 			tree.CurrentScene = scene;
 			this.CurrentScene = scene;
 		}
+
+		public void AddGameTheme(GameTheme gameTheme)
+		{
+			this.GameThemes.Add(gameTheme);
+			this.CurrentGameThemeIndex = this.GameThemes.Count - 1;
+
+			gameTheme.Connect(nameof(GameTheme.ThemeUpdated), this, nameof(UpdateTheme));
+		}
+
+		public GameTheme GetCurrentGameTheme()
+		{
+			return this.GameThemes[this.CurrentGameThemeIndex];
+		}
+
+		public void UpdateTheme() => this.MainScene.UpdateTheme();
 	}
 }

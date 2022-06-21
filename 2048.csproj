@@ -2,5 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>Empty</RootNamespace>
+    <LangVersion>9</LangVersion>
   </PropertyGroup>
 </Project>
