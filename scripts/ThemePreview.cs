@@ -11,7 +11,7 @@ public class ThemePreview : HBoxContainer
 
 	public override void _Ready()
 	{
-		Global.Instance.AddGameTheme(this.LinkedTheme);
+		Global.GameData.AddGameTheme(this.LinkedTheme);
 
 		int value = 1;
 		foreach (Node child in this.GetChildren())
@@ -25,7 +25,7 @@ public class ThemePreview : HBoxContainer
 			button.Connect("color_changed", this, nameof(UpdateColor), new(value));
 			value++;
 
-			button.Color = Global.Instance.GetCurrentGameTheme().GetTileColor(value);
+			button.Color = Global.GameData.GetCurrentGameTheme().GetTileColor(value);
 		}
 	}
 

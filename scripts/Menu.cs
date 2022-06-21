@@ -17,23 +17,14 @@ public class Menu : Control
 		this.Global.GotoMain();
 	}
 
-
 	private void _on_QuitButton_pressed()
 	{
 		this.GetTree().Quit();
 	}
 
+	private void _on_SaveButton_pressed() => Global.GameData.Save();
 
-	private void _on_SaveButton_pressed()
-	{
-		// Replace with function body.
-	}
-
-
-	private void _on_LoadButton_pressed()
-	{
-		// Replace with function body.
-	}
+	private void _on_LoadButton_pressed() => GameData.Load();
 
 	private void _on_NewThemeButton_pressed()
 	{

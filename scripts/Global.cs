@@ -1,4 +1,3 @@
-using Godot.Collections;
 using Godot;
 
 namespace scripts
@@ -7,12 +6,17 @@ namespace scripts
 	{
 		public static Global Instance { get; private set; }
 
+		public static GameData GameData
+		{
+			get => Instance._gameData;
+			set => Instance._gameData = value;
+		}
+
 		private Menu MenuScene { get; set; }
 		private Main MainScene { get; set; }
 		private Node CurrentScene { get; set; }
 
-		[Export] public Array<GameTheme> GameThemes = new();
-		[Export] public int CurrentGameThemeIndex = -1;
+		private GameData _gameData { get; set; }
 
 		public override void _Ready()
 		{
@@ -24,6 +28,8 @@ namespace scripts
 
 			PackedScene mainPreload = GD.Load<PackedScene>("res://scenes/Main.tscn");
 			this.MainScene = mainPreload.Instance<Main>();
+
+			this._gameData = new();
 
 			Global.Instance = this;
 		}
@@ -40,20 +46,6 @@ namespace scripts
 			root.AddChild(scene);
 			tree.CurrentScene = scene;
 			this.CurrentScene = scene;
-		}
-
-		public void AddGameTheme(GameTheme gameTheme)
-		{
-			this.GameThemes.Add(gameTheme);
-			this.CurrentGameThemeIndex = this.GameThemes.Count - 1;
-
-			gameTheme.Connect(nameof(GameTheme.ThemeUpdated), this, nameof(UpdateTheme));
-			this.UpdateTheme();
-		}
-
-		public GameTheme GetCurrentGameTheme()
-		{
-			return this.GameThemes[this.CurrentGameThemeIndex];
 		}
 
 		public void UpdateTheme() => this.MainScene.UpdateTheme();

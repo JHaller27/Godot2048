@@ -30,7 +30,7 @@ public class Tile : Sprite
 
 	public void RefreshColor()
 	{
-		GameTheme gameTheme = Global.Instance.GetCurrentGameTheme();
+		GameTheme gameTheme = Global.GameData.GetCurrentGameTheme();
 		Color color = gameTheme.GetTileColor(this);
 		this.SelfModulate = color;
 	}
