@@ -1,11 +1,18 @@
 using Godot;
-using System;
+using scripts;
 
 public class Menu : Control
 {
+	private Global Global { get; set; }
+
+	public override void _Ready()
+	{
+		this.Global = Global.Instance(this);
+	}
+
 	private void _on_PlayButton_pressed()
 	{
-		// Replace with function body.
+		this.Global.GotoMain();
 	}
 
 
