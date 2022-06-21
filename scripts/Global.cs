@@ -24,8 +24,8 @@ namespace scripts
 			Global.Instance = this;
 		}
 
-		public void GotoMenu() => this.GotoScene(this.MenuScene);
-		public void GotoMain() => this.GotoScene(this.MainScene);
+		public void GotoMenu() => this.CallDeferred(nameof(GotoScene), this.MenuScene);
+		public void GotoMain() => this.CallDeferred(nameof(GotoScene), this.MainScene);
 
 		private void GotoScene(Node scene)
 		{
@@ -35,6 +35,7 @@ namespace scripts
 			root.RemoveChild(this.CurrentScene);
 			root.AddChild(scene);
 			tree.CurrentScene = scene;
+			this.CurrentScene = scene;
 		}
 	}
 }
