@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scripts/Menu.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Menu.cs" type="Script" id=1]
 [ext_resource path="res://scenes/ThemePreview.tscn" type="PackedScene" id=2]
 
 [node name="Menu" type="Control"]

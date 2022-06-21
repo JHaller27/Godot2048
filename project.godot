@@ -18,16 +18,10 @@ _global_script_classes=[ {
 "class": "SaveGame",
 "language": "GDScript",
 "path": "res://resources/SaveGame.gd"
-}, {
-"base": "Sprite",
-"class": "Tile",
-"language": "GDScript",
-"path": "res://scripts/Tile.gd"
 } ]
 _global_script_class_icons={
 "Board": "",
-"SaveGame": "",
-"Tile": ""
+"SaveGame": ""
 }
 
 [application]
@@ -37,13 +31,6 @@ run/main_scene="res://scenes/Menu.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="Game2048"
 config/icon="res://icon.png"
-
-[autoload]
-
-Menu="*res://scenes/Menu.tscn"
-Main="*res://scenes/Main.tscn"
-Global="*res://scripts/Global.gd"
-GameTheme="*res://scripts/GameTheme.gd"
 
 [global]
 

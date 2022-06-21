@@ -1,13 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scripts/TileBoard.gd" type="Script" id=1]
-[ext_resource path="res://scripts/Main.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Tile.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -23,9 +20,6 @@ margin_left = -240.0
 margin_top = -240.0
 margin_right = 240.0
 margin_bottom = 240.0
-script = ExtResource( 1 )
-tile_scene = ExtResource( 3 )
-slide_time = 0.5
 
 [node name="Tile_0_0" parent="ColorRect/TileBoard" instance=ExtResource( 3 )]
 position = Vector2( 48, 48 )
@@ -90,5 +84,3 @@ scale = Vector2( 0.1875, 0.1875 )
 [node name="Tile_3_3" parent="ColorRect/TileBoard" instance=ExtResource( 3 )]
 position = Vector2( 432, 432 )
 scale = Vector2( 0.1875, 0.1875 )
-
-[node name="Tween" type="Tween" parent="ColorRect/TileBoard"]

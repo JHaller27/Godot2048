@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://scripts/ThemePreview.gd" type="Script" id=1]
+[gd_scene format=2]
 
 [node name="ThemePreview" type="HBoxContainer"]
 anchor_top = 0.5
@@ -8,8 +6,6 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = -19.0
 margin_bottom = 19.0
-script = ExtResource( 1 )
-offset = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 64.0
