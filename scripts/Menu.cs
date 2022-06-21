@@ -7,7 +7,7 @@ public class Menu : Control
 
 	public override void _Ready()
 	{
-		this.Global = Global.Instance(this);
+		this.Global = Global.Instance;
 	}
 
 	private void _on_PlayButton_pressed()

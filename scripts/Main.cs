@@ -7,7 +7,7 @@ public class Main : Control
 
 	public override void _Ready()
 	{
-		this.Global = Global.Instance(this);
+		this.Global = Global.Instance;
 	}
 
 	public override void _Input(InputEvent inputEvent)
