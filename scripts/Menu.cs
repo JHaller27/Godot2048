@@ -3,6 +3,8 @@ using scripts;
 
 public class Menu : Control
 {
+	private PackedScene ThemePreviewPreload = ResourceLoader.Load<PackedScene>("res://scenes/ThemePreview.tscn");
+
 	private Global Global { get; set; }
 
 	public override void _Ready()
@@ -31,5 +33,13 @@ public class Menu : Control
 	private void _on_LoadButton_pressed()
 	{
 		// Replace with function body.
+	}
+
+	private void _on_NewThemeButton_pressed()
+	{
+		ThemePreview newChild = ThemePreviewPreload.Instance<ThemePreview>();
+
+		Node container = this.GetNode("./Panel/MarginContainer/VBoxContainer/ScrollContainer/ThemeContainer");
+		container.AddChild(newChild);
 	}
 }
