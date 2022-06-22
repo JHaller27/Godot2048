@@ -29,7 +29,7 @@ public class ThemePreview : HBoxContainer
 		}
 	}
 
-	private void UpdateColor(Color color, int value)
+	public void UpdateColor(Color color, int value)
 	{
 		this.LinkedTheme.SetTileColor(value, color);
 	}

@@ -1,10 +1,12 @@
 using Godot;
+using Godot.Collections;
 
 namespace scripts
 {
 	public class Global : Node
 	{
 		public static Global Instance { get; private set; }
+		private const string SaveGamePath = "user://savegame.json";
 
 		public static GameData GameData
 		{
@@ -49,5 +51,62 @@ namespace scripts
 		}
 
 		public void UpdateTheme() => this.MainScene.UpdateTheme();
+
+		public static void Save()
+		{
+			object export = Instance._gameData.Export();
+			string serialized = JSON.Print(export, "  ");
+
+			File saveGame = new();
+			saveGame.Open(SaveGamePath, File.ModeFlags.Write);
+			try
+			{
+				saveGame.StoreString(serialized);
+			}
+			finally
+			{
+				saveGame.Close();
+			}
+
+			GD.Print("Saved game to ", SaveGamePath);
+		}
+
+		public static void Load()
+		{
+			File saveGame = new();
+			if (!saveGame.FileExists(SaveGamePath))
+			{
+				return;
+			}
+
+			string data;
+			saveGame.Open(SaveGamePath, File.ModeFlags.Read);
+			try
+			{
+				data = saveGame.GetAsText();
+			}
+			catch
+			{
+				return;
+			}
+			finally
+			{
+				saveGame.Close();
+			}
+
+			object obj = JSON.Parse(data).Result;
+
+			// Godot type shenanigans
+			if (obj is not Dictionary dictionary)
+			{
+				return;
+			}
+			Dictionary<string, object> deserialized = new(dictionary);
+
+			Instance._gameData = GameData.Import(deserialized);
+			GD.Print("Loaded game data from ", SaveGamePath);
+
+			Instance.MenuScene.RefreshThemes();
+		}
 	}
 }
