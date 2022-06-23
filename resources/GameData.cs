@@ -3,6 +3,7 @@ using System.Linq;
 using Godot;
 using GDC = Godot.Collections;
 using scripts;
+using scripts.Utils;
 
 public class GameData : Resource
 {
@@ -38,14 +39,10 @@ public class GameData : Resource
 	{
 		GameData dest = new();
 		dest.CurrentGameThemeIndex = source["CurrentIndex"] as int? ?? 0;
-
-		// Godot type shenanigans
-		GDC.Array gameThemeRawArray = (GDC.Array)source["GameThemes"];
-		foreach (GDC.Dictionary gameThemeDict in gameThemeRawArray)
-		{
-			GameTheme gameTheme = GameTheme.Import(gameThemeDict);
-			dest._gameThemes.Add(gameTheme);
-		}
+		dest._gameThemes = ((GDC.Array)source["GameThemes"])
+			.CastArr<GDC.Dictionary>()
+			.Select(GameTheme.Import)
+			.ToList();
 
 		return dest;
 	}

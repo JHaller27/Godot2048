@@ -19,12 +19,13 @@ public class Menu : Control
 		foreach (Node child in this.ThemePreviewContainer.GetChildren())
 		{
 			this.ThemePreviewContainer.RemoveChild(child);
+			child.Free();
 		}
 
-		foreach (GameTheme gameTheme in Global.GameData.GameThemes)
-		{
-			this.AddTheme(gameTheme);
-		}
+		// foreach (GameTheme gameTheme in Global.GameData.GameThemes)
+		// {
+		// 	this.AddTheme(gameTheme);
+		// }
 	}
 
 	private void _on_PlayButton_pressed()

@@ -1,9 +1,9 @@
-using System;
 using System.Collections;
 using Godot;
 using GDC = Godot.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using scripts.Utils;
 
 namespace scripts
 {
@@ -46,11 +46,9 @@ namespace scripts
 		{
 			GameTheme dest = new();
 			dest.Name = source["Name"] as string;
-
-			foreach (DictionaryEntry entry in (GDC.Dictionary)source["TileColors"])
-			{
-				dest._tileColors.Add(int.Parse((string)entry.Key), new((string)entry.Value));
-			}
+			dest._tileColors = ((GDC.Dictionary)source["TileColors"])
+				.CastDict<string, string>()
+				.ToDictionary(kvp => int.Parse(kvp.Key), kvp => new Color(kvp.Value));
 
 			return dest;
 		}
