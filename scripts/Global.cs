@@ -26,10 +26,10 @@ namespace scripts
 			this.CurrentScene = root.GetChild(root.GetChildCount() - 1);
 
 			PackedScene menuPreload = GD.Load<PackedScene>("res://scenes/Menu.tscn");
-			this.MenuScene = menuPreload.Instance<Menu>();
+			this.MenuScene = this.CurrentScene as Menu ?? menuPreload.Instance<Menu>();
 
 			PackedScene mainPreload = GD.Load<PackedScene>("res://scenes/Main.tscn");
-			this.MainScene = mainPreload.Instance<Main>();
+			this.MainScene = this.CurrentScene as Main ?? mainPreload.Instance<Main>();
 
 			this._gameData = new();
 
