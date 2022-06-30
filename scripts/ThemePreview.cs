@@ -26,11 +26,18 @@ public class ThemePreview : HBoxContainer
 			value++;
 
 			button.Color = Global.GameData.GetCurrentGameTheme().GetTileColor(value);
+			this.ColorPickerButtons.Add(button);
 		}
 	}
 
 	public void UpdateColor(Color color, int value)
 	{
 		this.LinkedTheme.SetTileColor(value, color);
+		this.ColorPickerButtons[value - 1].Color = color;
+	}
+
+	public void Deregister()
+	{
+		Global.GameData.RemoveGameTheme(this.LinkedTheme);
 	}
 }

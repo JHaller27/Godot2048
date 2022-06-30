@@ -34,6 +34,7 @@ namespace scripts
 			this._gameData = new();
 
 			Global.Instance = this;
+			this.GotoMenu();
 		}
 
 		public void GotoMenu() => this.CallDeferred(nameof(GotoScene), this.MenuScene);
@@ -101,7 +102,8 @@ namespace scripts
 			{
 				return;
 			}
-			Dictionary<string, object> deserialized = new(dictionary);
+
+			Godot.Collections.Dictionary<string, object> deserialized = new(dictionary);
 
 			Instance._gameData = GameData.Import(deserialized);
 			GD.Print("Loaded game data from ", SaveGamePath);

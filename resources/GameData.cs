@@ -10,14 +10,25 @@ public class GameData : Resource
 	private List<GameTheme> _gameThemes = new();
 	private int CurrentGameThemeIndex = -1;
 
-	public IEnumerable<GameTheme> GameThemes => this._gameThemes;
+	public IEnumerable<GameTheme> GameThemes => this._gameThemes.ToList();
 
 	public void AddGameTheme(GameTheme gameTheme)
 	{
+		if (this._gameThemes.Contains(gameTheme)) return;
+
 		this._gameThemes.Add(gameTheme);
 		this.CurrentGameThemeIndex = this._gameThemes.Count - 1;
 
 		gameTheme.Connect(nameof(GameTheme.ThemeUpdated), Global.Instance, nameof(Global.UpdateTheme));
+		Global.Instance.UpdateTheme();
+	}
+
+	public void RemoveGameTheme(GameTheme gameTheme)
+	{
+		if (!this._gameThemes.Contains(gameTheme)) return;
+
+		this._gameThemes.Remove(gameTheme);
+		this.CurrentGameThemeIndex = 0;
 		Global.Instance.UpdateTheme();
 	}
 
@@ -40,7 +51,7 @@ public class GameData : Resource
 		GameData dest = new();
 		dest.CurrentGameThemeIndex = source["CurrentIndex"] as int? ?? 0;
 		dest._gameThemes = ((GDC.Array)source["GameThemes"])
-			.CastArr<GDC.Dictionary>()
+			.ToSys<GDC.Dictionary>()
 			.Select(GameTheme.Import)
 			.ToList();
 

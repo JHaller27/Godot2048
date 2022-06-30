@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 using scripts;
+using scripts.Utils;
 
 public class Menu : Control
 {
@@ -16,16 +18,17 @@ public class Menu : Control
 
 	public void RefreshThemes()
 	{
-		foreach (Node child in this.ThemePreviewContainer.GetChildren())
+		foreach (ThemePreview child in this.ThemePreviewContainer.GetChildren<ThemePreview>())
 		{
 			this.ThemePreviewContainer.RemoveChild(child);
-			child.Free();
+			child.QueueFree();
+			child.Deregister();
 		}
 
-		// foreach (GameTheme gameTheme in Global.GameData.GameThemes)
-		// {
-		// 	this.AddTheme(gameTheme);
-		// }
+		foreach (GameTheme gameTheme in Global.GameData.GameThemes)
+		{
+			this.AddTheme(gameTheme);
+		}
 	}
 
 	private void _on_PlayButton_pressed()
@@ -49,10 +52,11 @@ public class Menu : Control
 
 	private void AddTheme(GameTheme theme = null)
 	{
+		Console.WriteLine("Adding new theme: " + theme?.Name);
+
 		ThemePreview newChild = ThemePreviewPreload.Instance<ThemePreview>();
 
-		Node container = this.GetNode("./Panel/MarginContainer/VBoxContainer/ScrollContainer/ThemeContainer");
-		container.AddChild(newChild);
+		this.ThemePreviewContainer.AddChild(newChild);
 
 		if (theme == null) return;
 
