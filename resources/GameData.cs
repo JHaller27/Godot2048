@@ -10,7 +10,7 @@ public class GameData : Resource
 	private List<GameTheme> _gameThemes = new();
 	private int CurrentGameThemeIndex = -1;
 
-	public IEnumerable<GameTheme> GameThemes => this._gameThemes.ToList();
+	public IEnumerable<GameTheme> GameThemes => this._gameThemes;
 
 	public void AddGameTheme(GameTheme gameTheme)
 	{

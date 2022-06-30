@@ -58,14 +58,6 @@ public class Menu : Control
 
 		this.ThemePreviewContainer.AddChild(newChild);
 
-		if (theme == null) return;
-
-		foreach (KeyValuePair<int, Color> themeKvp in theme.TileColors)
-		{
-			Color color = themeKvp.Value;
-			int value = themeKvp.Key;
-
-			newChild.UpdateColor(color, value);
-		}
+		newChild.SetTheme(theme);
 	}
 }

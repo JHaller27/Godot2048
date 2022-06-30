@@ -18,6 +18,8 @@ namespace scripts
 
 		public void SetTileColor(int value, Color color)
 		{
+			if (this._tileColors[value] == color) return;
+
 			this._tileColors[value] = color;
 			this.EmitSignal(nameof(ThemeUpdated));
 		}

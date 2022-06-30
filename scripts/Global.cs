@@ -103,9 +103,9 @@ namespace scripts
 				return;
 			}
 
-			Godot.Collections.Dictionary<string, object> deserialized = new(dictionary);
+			Dictionary<string, object> deserialized = new(dictionary);
 
-			Instance._gameData = GameData.Import(deserialized);
+			GameData = GameData.Import(deserialized);
 			GD.Print("Loaded game data from ", SaveGamePath);
 
 			Instance.MenuScene.RefreshThemes();
