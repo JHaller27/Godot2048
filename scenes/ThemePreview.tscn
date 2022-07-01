@@ -99,3 +99,4 @@ margin_right = 1024.0
 margin_bottom = 72.0
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/RenameButton" to="." method="_on_RenameButton_pressed"]
+[connection signal="color_changed" from="BackgroundColorPickerButton" to="." method="_on_BackgroundColorPickerButton_color_changed"]

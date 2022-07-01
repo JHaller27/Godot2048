@@ -14,6 +14,8 @@ namespace scripts
 		private Dictionary<int, Color> _tileColors = new();
 		public IReadOnlyDictionary<int, Color> TileColors => this._tileColors;
 
+		public Color BackgroundColor { get; set; }
+
 		[Signal] public delegate void ThemeUpdated();
 
 		public void SetTileColor(int value, Color color)
@@ -40,6 +42,7 @@ namespace scripts
 					kvp => kvp.Key,
 					kvp => kvp.Value.ToHtml()
 				)) },
+				{ "BackgroundColor", this.BackgroundColor.ToHtml() },
 			};
 		}
 
@@ -50,6 +53,7 @@ namespace scripts
 			dest._tileColors = ((GDC.Dictionary)source["TileColors"])
 				.CastDict<string, string>()
 				.ToDictionary(kvp => int.Parse(kvp.Key), kvp => new Color(kvp.Value));
+			dest.BackgroundColor = new((string)source["BackgroundColor"]);
 
 			return dest;
 		}

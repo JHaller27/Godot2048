@@ -46,7 +46,8 @@ public class ThemePreview : Control
 			this.ColorPickerButtons[value - 1].Color = color;
 		}
 
-		this.LinkedTheme.Name = this.LinkedTheme.Name;
+		this.GetBGColorPicker().Color = this.LinkedTheme.BackgroundColor;
+
 		this.GetNameBox().Text = this.LinkedTheme.Name;
 	}
 
@@ -55,12 +56,18 @@ public class ThemePreview : Control
 		this.LinkedTheme.SetTileColor(value, color);
 	}
 
+	private void _on_BackgroundColorPickerButton_color_changed(Color color)
+	{
+		this.LinkedTheme.BackgroundColor = color;
+	}
+
 	public void Deregister()
 	{
 		Global.GameData.RemoveGameTheme(this.LinkedTheme);
 	}
 
 	private LineEdit GetNameBox() => this.GetNode<LineEdit>("./HBoxContainer/VBoxContainer/Label");
+	private ColorPickerButton GetBGColorPicker() => this.GetNode<ColorPickerButton>("./BackgroundColorPickerButton");
 
 	private void _on_RenameButton_pressed()
 	{
