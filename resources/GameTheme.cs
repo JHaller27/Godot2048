@@ -14,15 +14,21 @@ namespace scripts
 		private Dictionary<int, Color> _tileColors = new();
 		public IReadOnlyDictionary<int, Color> TileColors => this._tileColors;
 
-		public Color BackgroundColor { get; set; }
+		public Color BackgroundColor { get; private set; } = UnknownColor;
 
 		[Signal] public delegate void ThemeUpdated();
 
 		public void SetTileColor(int value, Color color)
 		{
-			if (this._tileColors[value] == color) return;
+			if (this._tileColors.ContainsKey(value) && this._tileColors[value] == color) return;
 
 			this._tileColors[value] = color;
+			this.EmitSignal(nameof(ThemeUpdated));
+		}
+
+		public void SetBackgroundColor(Color color)
+		{
+			this.BackgroundColor = color;
 			this.EmitSignal(nameof(ThemeUpdated));
 		}
 

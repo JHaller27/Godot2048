@@ -8,6 +8,8 @@ public class Main : Control
 
 	private readonly List<Tile> Tiles = new();
 
+	private ColorRect GetBackground() => this.GetNode<ColorRect>("ColorRect");
+
 	public override void _Ready()
 	{
 		this.Global = Global.Instance;
@@ -29,5 +31,6 @@ public class Main : Control
 	public void UpdateTheme()
 	{
 		this.Tiles.ForEach(t => t.RefreshColor());
+		this.GetBackground().Color = Global.GameData.GetCurrentGameTheme().BackgroundColor;
 	}
 }

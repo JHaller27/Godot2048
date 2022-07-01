@@ -58,7 +58,7 @@ public class ThemePreview : Control
 
 	private void _on_BackgroundColorPickerButton_color_changed(Color color)
 	{
-		this.LinkedTheme.BackgroundColor = color;
+		this.LinkedTheme.SetBackgroundColor(color);
 	}
 
 	public void Deregister()

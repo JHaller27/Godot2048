@@ -109,6 +109,7 @@ namespace scripts
 			GD.Print("Loaded game data from ", SaveGamePath);
 
 			Instance.MenuScene.RefreshThemes();
+			Instance.MainScene.UpdateTheme();
 		}
 	}
 }

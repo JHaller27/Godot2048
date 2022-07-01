@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Godot;
 using scripts;
 using scripts.Utils;
@@ -14,6 +13,7 @@ public class Menu : Control
 	public override void _Ready()
 	{
 		this.Global = Global.Instance;
+		this.AddTheme();
 	}
 
 	public void RefreshThemes()
